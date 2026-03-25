@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>유정수 | AI + Game Developer Portfolio</title>
+  <meta name="description" content="AI + Game Developer 유정수의 포트폴리오. Unity, Godot, LLM, RAG, MLOps 기반 게임 AI 프로젝트." />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.5/babel.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    * { font-family: 'Inter', 'Noto Sans KR', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: #0a0a0f; color: #e2e8f0; }
+    .gradient-text { background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .gradient-border { border-image: linear-gradient(135deg, #3b82f6, #8b5cf6) 1; }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15); }
+    .tech-badge { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); }
+    .section-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent); }
+    .glow { box-shadow: 0 0 30px rgba(99, 102, 241, 0.1); }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-in { animation: fadeInUp 0.6s ease-out forwards; }
+    .nav-blur { backdrop-filter: blur(12px); background: rgba(10, 10, 15, 0.8); }
+    .metric-card { background: linear-gradient(135deg, rgba(30, 30, 45, 0.8), rgba(20, 20, 35, 0.8)); }
+    .featured-card { background: linear-gradient(135deg, rgba(20, 20, 35, 0.9), rgba(15, 15, 25, 0.9)); border: 1px solid rgba(99, 102, 241, 0.15); }
+    .other-card { background: rgba(20, 20, 35, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); }
+    .other-card:hover { border-color: rgba(99, 102, 241, 0.3); }
+    .pipeline-step { background: rgba(30, 30, 50, 0.6); border: 1px solid rgba(99, 102, 241, 0.2); }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // ===== Data =====
+    const PROFILE = {
+      name: "유정수",
+      titleEn: "AI + Game Developer",
+      email: "dbwjdtn10@naver.com",
+      phone: "010-2633-8801",
+      github: "https://github.com/dbwjdtn10",
+      intro: "게임 개발과 AI를 결합하여, 플레이어에게 더 깊은 경험을 제공하는 시스템을 설계합니다.",
+      subIntro: "Unity/Godot 게임 개발부터 LLM 기반 NPC 대화 시스템, ML 유저 이탈 예측까지 — 게임 산업의 AI 혁신을 이끌어갈 준비가 되어있습니다."
+    };
+
+    const FEATURED_PROJECTS = [
+      {
+        id: "finalbite",
+        title: "FinalBite",
+        subtitle: "뱀서라이크 모바일 액션 로그라이트",
+        category: "Game Development",
+        color: "#f59e0b",
+        icon: "🎮",
+        description: "500+ 동시 적을 안정적으로 처리하면서 모바일 성능을 유지하는 Unity 6.3 기반 게임. 1인 개발로 기획부터 Google Play 출시 준비까지 전 과정을 수행했습니다.",
+        techStack: ["Unity 6.3", "C#", "ScriptableObject", "Object Pooling", "AdMob", "Unity IAP"],
+        metrics: [
+          { label: "동시 적", value: "500+", desc: "안정 60fps" },
+          { label: "GC 할당", value: "0", desc: "런타임 Zero GC" },
+          { label: "스크립트", value: "76개", desc: "12,435 LOC" },
+          { label: "SO 에셋", value: "81개", desc: "데이터 주도 설계" }
+        ],
+        highlights: [
+          "제네릭 오브젝트 풀링 (IPoolable) — 적 6종, 투사체 14종, 데미지팝업, 경험치젬 풀링",
+          "GC-Free: SharedHitBuffer(static Collider2D[512]), Physics2D.OverlapCircleNonAlloc",
+          "Custom SpriteAnimator — Animator 대비 메모리 40% 절감",
+          "보스 3페이즈 AI — HP 기반 상태머신, 4종 보스 고유 패턴",
+          "무기 습합 시스템 — 8기본 + 8진화, MergeRecipe SO 기반",
+          "13단계 One-Click 에디터 자동화 — 1인 개발 반복작업 90% 절감",
+          "AdMob 보상형 광고 + Unity IAP 5종 수익화"
+        ],
+        github: "https://github.com/dbwjdtn10/FinalBite",
+        decisions: [
+          { decision: "Animator → Custom SpriteAnimator", reason: "500+ 엔티티에서 AnimatorController 오버헤드 제거" },
+          { decision: "코루틴 → Timer 기반 상태머신", reason: "코루틴의 GC 할당 방지, 일시정지/재개 제어 용이" },
+          { decision: "ScriptableObject 데이터 주도", reason: "코드 수정 없이 Inspector에서 밸런스 조정" }
+        ]
+      },
+      {
+        id: "npc-dialogue",
+        title: "NPC Dialogue Engine",
+        subtitle: "RAG 기반 게임 NPC 동적 대화 시스템",
+        category: "AI + Game",
+        color: "#8b5cf6",
+        icon: "🗡️",
+        description: "LLM + RAG + 게임 시스템을 연동한 동적 대화 엔진. 8단계 파이프라인으로 세계관 충실성을 유지하면서 감정, 호감도, 퀘스트가 연동되는 NPC 대화 경험을 제공합니다.",
+        techStack: ["FastAPI", "LangChain", "ChromaDB", "Gemini", "Redis", "PostgreSQL", "React", "WebSocket", "Docker"],
+        metrics: [
+          { label: "대화 파이프라인", value: "8단계", desc: "보안→RAG→감정→응답" },
+          { label: "보안 레이어", value: "3중", desc: "Rule+LLM+Output" },
+          { label: "NPC 페르소나", value: "4종", desc: "고유 성격 유지" },
+          { label: "감정 상태", value: "7종", desc: "쿨다운+턴 기반 감쇠" }
+        ],
+        highlights: [
+          "Hybrid RAG — Vector 70% + BM25 30% + Cross-Encoder 리랭킹",
+          "Kiwi 한국어 형태소 분석기 기반 BM25 최적화",
+          "3중 프롬프트 인젝션 방어 (40+ 정규식 → LLM 분류 → Output 검증)",
+          "7종 감정 상태머신 + 5단계 호감도 시스템 (콘텐츠 잠금해제)",
+          "Cross-NPC 메모리 (Redis 단기 + PostgreSQL 장기 기억 공유)",
+          "스포일러 방지 힌트 엔진 (hint_level → max_stage 매핑)",
+          "자가 평가 루프 (Persona Consistency + Hallucination Check)"
+        ],
+        github: "https://github.com/dbwjdtn10/Npcdialogueengine",
+        decisions: [
+          { decision: "순차 파이프라인 vs 병렬", reason: "보안 필터가 먼저 실행되어야 비용 절감 (악의적 입력 시 LLM 미호출)" },
+          { decision: "Hybrid RAG (Vector+BM25)", reason: "한국어 세계관 문서에서 키워드 정확도와 의미 검색을 모두 확보" },
+          { decision: "Redis + PostgreSQL 이중 메모리", reason: "세션 내 빠른 조회(Redis) + 영구 기억 저장(PostgreSQL) 분리" }
+        ]
+      },
+      {
+        id: "gameai-analytics",
+        title: "GameAI Analytics",
+        subtitle: "게임 유저 이탈 예측 시스템 + MLOps",
+        category: "ML / MLOps",
+        color: "#10b981",
+        icon: "📊",
+        description: "프로덕션 수준의 엔드투엔드 ML 시스템. 5개 모델 앙상블로 AUC-ROC 0.9409를 달성하고, MLflow + DVC + Airflow + Prometheus/Grafana까지 MLOps 풀셋을 구축했습니다.",
+        techStack: ["XGBoost", "LightGBM", "Optuna", "FastAPI", "MLflow", "DVC", "Airflow", "Docker", "Prometheus", "Grafana", "Streamlit"],
+        metrics: [
+          { label: "AUC-ROC", value: "0.9409", desc: "XGBoost 최고 성능" },
+          { label: "테스트", value: "63개", desc: "pytest + CI Gate" },
+          { label: "Docker", value: "7서비스", desc: "풀스택 컨테이너" },
+          { label: "대시보드", value: "7페이지", desc: "Streamlit 분석" }
+        ],
+        highlights: [
+          "5모델 앙상블 (LR, XGBoost, LightGBM, Voting, Stacking)",
+          "Optuna HPO — 50 trials, 9개 하이퍼파라미터, Tree-Parzen Estimator",
+          "K-Means 4클러스터 유저 세그멘테이션 + SHAP 모델 해석",
+          "Airflow 주간 재학습 DAG (drift > 30% → 조건부 재학습 → 자동 배포)",
+          "KS/PSI 데이터 드리프트 탐지 + Prediction Drift 모니터링",
+          "FastAPI 서빙 — JWT + API Key 이중 인증, Redis 캐싱, Rate Limiting",
+          "Model Regression Gate — CI에서 AUC ≥ 0.90 자동 검증"
+        ],
+        github: "https://github.com/dbwjdtn10/GameAI_Analytics",
+        decisions: [
+          { decision: "앙상블 (Voting+Stacking)", reason: "단일 모델 대비 +2% AUC 향상, 합의 기반 안정성 확보" },
+          { decision: "Optuna vs GridSearch", reason: "TPE 알고리즘으로 탐색 효율 3-5배 향상" },
+          { decision: "Airflow 조건부 재학습", reason: "drift ratio > 30%일 때만 학습하여 불필요한 컴퓨팅 비용 절감" }
+        ]
+      }
+    ];
+
+    const OTHER_PROJECTS = [
+      { title: "AbyssalDescent", desc: "AI 던전 마스터 기반 3D 로그라이크 (Godot 4 + FastAPI)", tags: ["Godot 4", "AI DM", "3D"], github: "https://github.com/dbwjdtn10/AbyssalDescent" },
+      { title: "AI Arena", desc: "자연어로 전투 전략을 입력하는 실험적 격투 게임", tags: ["Godot 4", "NLP", "실시간"], github: "https://github.com/dbwjdtn10/AI_Arena" },
+      { title: "Game Content Pipeline", desc: "AI 기반 게임 콘텐츠 자동 생성 + 4중 검증 파이프라인", tags: ["Celery", "Pydantic", "LLM"], github: "https://github.com/dbwjdtn10/game-content-pipeline" },
+      { title: "Procedural Quest Writer", desc: "AI 절차적 퀘스트 자동 생성 풀스택 데모", tags: ["React", "FastAPI", "Gemini"], github: "https://github.com/dbwjdtn10/Procedural-Quest-Writer" },
+      { title: "Smart Monitor Agent", desc: "AI 리서치/모니터링 봇 — 크롤링 + Telegram 알림", tags: ["Playwright", "Gemini", "Strategy Pattern"], github: "https://github.com/dbwjdtn10/smart-monitor-agent" },
+      { title: "AI Email Triage", desc: "LangGraph 5-에이전트 이메일 자동 처리 파이프라인", tags: ["LangGraph", "Fan-out", "HITL"], github: "https://github.com/dbwjdtn10/AI-email-triage" },
+      { title: "4Bro", desc: "AI 광고 어시스턴트 데스크톱 앱 (3단계 LLM 폴백)", tags: ["PyInstaller", "Gemini", "Agent"], github: "https://github.com/dbwjdtn10/4Bro" },
+      { title: "FinalBite (Unity)", desc: "뱀서라이크 모바일 게임 — Google Play 출시 준비", tags: ["Unity 6.3", "Mobile", "IAP"], github: "https://github.com/dbwjdtn10/FinalBite" },
+      { title: "StoryProof", desc: "AI 소설 분석/창작 플랫폼 — 4인 팀 팀장 (6주)", tags: ["RAG", "Celery", "Team Lead"], github: "https://github.com/dbwjdtn10/StoryProof" },
+      { title: "LocalDocs", desc: "Tauri 2.0 + Rust 로컬 AI 문서 어시스턴트", tags: ["Tauri", "Rust", "Ollama"], github: "https://github.com/dbwjdtn10/LocalDocs" },
+    ];
+
+    const SKILLS = {
+      "Game Development": ["Unity 6.3", "Godot 4", "C#", "GDScript", "Object Pooling", "ScriptableObject", "State Machine", "Editor Tooling"],
+      "AI / LLM": ["LangChain", "LangGraph", "RAG (Hybrid)", "Prompt Engineering", "Structured Output", "Gemini", "Claude API", "Ollama"],
+      "ML / MLOps": ["XGBoost", "LightGBM", "Optuna", "SHAP", "MLflow", "DVC", "Airflow", "ONNX"],
+      "Backend": ["FastAPI", "WebSocket", "Celery", "PostgreSQL", "Redis", "Docker", "JWT/API Key"],
+      "Frontend": ["React", "TypeScript", "Tailwind CSS", "Streamlit"],
+      "Infra / DevOps": ["Docker Compose", "GitHub Actions", "Prometheus", "Grafana", "AWS EC2"],
+      "Languages": ["Python", "C#", "Rust", "GDScript", "TypeScript", "JavaScript"]
+    };
+
+    // ===== Components =====
+
+    function Nav() {
+      const [scrolled, setScrolled] = useState(false);
+      useEffect(() => {
+        const handler = () => setScrolled(window.scrollY > 50);
+        window.addEventListener("scroll", handler);
+        return () => window.removeEventListener("scroll", handler);
+      }, []);
+      return (
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all ${scrolled ? 'nav-blur border-b border-gray-800' : ''}`}>
+          <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" className="text-lg font-bold gradient-text">YJS</a>
+            <div className="flex gap-6 text-sm text-gray-400">
+              <a href="#featured" className="hover:text-white transition">Projects</a>
+              <a href="#skills" className="hover:text-white transition">Skills</a>
+              <a href="#contact" className="hover:text-white transition">Contact</a>
+              <a href={PROFILE.github} target="_blank" rel="noopener" className="hover:text-white transition">GitHub ↗</a>
+            </div>
+          </div>
+        </nav>
+      );
+    }
+
+    function Hero() {
+      return (
+        <section className="min-h-screen flex items-center justify-center px-6 pt-20">
+          <div className="max-w-4xl text-center animate-in">
+            <p className="text-indigo-400 text-sm font-medium tracking-widest uppercase mb-4">Portfolio</p>
+            <h1 className="text-5xl md:text-7xl font-black mb-4">
+              <span className="gradient-text">{PROFILE.name}</span>
+            </h1>
+            <p className="text-2xl md:text-3xl font-light text-gray-300 mb-6">{PROFILE.titleEn}</p>
+            <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-4">{PROFILE.intro}</p>
+            <p className="text-base text-gray-500 max-w-2xl mx-auto mb-10">{PROFILE.subIntro}</p>
+            <div className="flex justify-center gap-4 flex-wrap">
+              <a href="#featured" className="px-8 py-3 bg-indigo-600 hover:bg-indigo-500 rounded-lg font-medium transition">프로젝트 보기</a>
+              <a href={PROFILE.github} target="_blank" rel="noopener" className="px-8 py-3 border border-gray-600 hover:border-indigo-400 rounded-lg font-medium transition">GitHub ↗</a>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function MetricCard({ label, value, desc }) {
+      return (
+        <div className="metric-card rounded-lg p-4 text-center">
+          <div className="text-2xl font-black text-white">{value}</div>
+          <div className="text-xs text-gray-400 mt-1">{label}</div>
+          <div className="text-xs text-gray-500">{desc}</div>
+        </div>
+      );
+    }
+
+    function FeaturedProject({ project, index }) {
+      const [expanded, setExpanded] = useState(false);
+      return (
+        <div className="featured-card rounded-2xl p-8 card-hover glow mb-8">
+          <div className="flex items-start justify-between mb-6">
+            <div>
+              <span className="text-xs font-medium px-3 py-1 rounded-full" style={{background: `${project.color}20`, color: project.color}}>{project.category}</span>
+              <h3 className="text-3xl font-bold text-white mt-3">{project.icon} {project.title}</h3>
+              <p className="text-gray-400 mt-1">{project.subtitle}</p>
+            </div>
+            <a href={project.github} target="_blank" rel="noopener" className="text-gray-500 hover:text-white transition text-sm border border-gray-700 px-3 py-1 rounded-lg">GitHub ↗</a>
+          </div>
+
+          <p className="text-gray-300 mb-6 leading-relaxed">{project.description}</p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+            {project.metrics.map((m, i) => <MetricCard key={i} {...m} />)}
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.techStack.map((tech, i) => (
+              <span key={i} className="tech-badge text-xs px-3 py-1 rounded-full text-blue-300">{tech}</span>
+            ))}
+          </div>
+
+          <div className="mb-4">
+            <h4 className="text-sm font-semibold text-gray-300 mb-3 uppercase tracking-wider">핵심 구현</h4>
+            <ul className="space-y-2">
+              {(expanded ? project.highlights : project.highlights.slice(0, 4)).map((h, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
+                  <span className="text-indigo-400 mt-0.5">▸</span>
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+            {project.highlights.length > 4 && (
+              <button onClick={() => setExpanded(!expanded)} className="text-indigo-400 text-sm mt-2 hover:text-indigo-300 transition">
+                {expanded ? "접기 ▲" : `+${project.highlights.length - 4}개 더 보기 ▼`}
+              </button>
+            )}
+          </div>
+
+          <div>
+            <h4 className="text-sm font-semibold text-gray-300 mb-3 uppercase tracking-wider">기술적 의사결정</h4>
+            <div className="space-y-2">
+              {project.decisions.map((d, i) => (
+                <div key={i} className="pipeline-step rounded-lg p-3">
+                  <span className="text-white text-sm font-medium">{d.decision}</span>
+                  <p className="text-gray-500 text-xs mt-1">→ {d.reason}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function OtherProject({ project }) {
+      return (
+        <a href={project.github} target="_blank" rel="noopener" className="other-card rounded-xl p-5 card-hover block">
+          <h4 className="text-white font-semibold mb-2">{project.title}</h4>
+          <p className="text-gray-500 text-sm mb-3">{project.desc}</p>
+          <div className="flex flex-wrap gap-1">
+            {project.tags.map((tag, i) => (
+              <span key={i} className="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400">{tag}</span>
+            ))}
+          </div>
+        </a>
+      );
+    }
+
+    function SkillsSection() {
+      return (
+        <section id="skills" className="py-20 px-6">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center text-white mb-12">Tech Stack</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Object.entries(SKILLS).map(([category, skills]) => (
+                <div key={category} className="other-card rounded-xl p-5">
+                  <h3 className="text-indigo-400 font-semibold text-sm mb-3 uppercase tracking-wider">{category}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {skills.map((skill, i) => (
+                      <span key={i} className="tech-badge text-xs px-3 py-1 rounded-full text-gray-300">{skill}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Contact() {
+      return (
+        <section id="contact" className="py-20 px-6">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-white mb-4">Contact</h2>
+            <p className="text-gray-400 mb-8">게임 AI 개발에 대해 이야기하고 싶으시다면 연락해주세요.</p>
+            <div className="flex justify-center gap-6 flex-wrap">
+              <a href={`mailto:${PROFILE.email}`} className="flex items-center gap-2 text-gray-300 hover:text-indigo-400 transition">
+                <span>📧</span> {PROFILE.email}
+              </a>
+              <a href={PROFILE.github} target="_blank" rel="noopener" className="flex items-center gap-2 text-gray-300 hover:text-indigo-400 transition">
+                <span>💻</span> GitHub
+              </a>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <Nav />
+          <Hero />
+          <div className="section-divider max-w-4xl mx-auto" />
+
+          <section id="featured" className="py-20 px-6">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-16">
+                <p className="text-indigo-400 text-sm font-medium tracking-widest uppercase mb-2">Featured</p>
+                <h2 className="text-3xl font-bold text-white">핵심 프로젝트</h2>
+              </div>
+              {FEATURED_PROJECTS.map((p, i) => <FeaturedProject key={p.id} project={p} index={i} />)}
+            </div>
+          </section>
+
+          <div className="section-divider max-w-4xl mx-auto" />
+
+          <section className="py-20 px-6">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <p className="text-gray-500 text-sm font-medium tracking-widest uppercase mb-2">More</p>
+                <h2 className="text-3xl font-bold text-white">기타 프로젝트</h2>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {OTHER_PROJECTS.map((p, i) => <OtherProject key={i} project={p} />)}
+              </div>
+            </div>
+          </section>
+
+          <div className="section-divider max-w-4xl mx-auto" />
+          <SkillsSection />
+          <div className="section-divider max-w-4xl mx-auto" />
+          <Contact />
+
+          <footer className="py-8 text-center text-gray-600 text-sm border-t border-gray-800">
+            <p>© 2026 유정수. Built with React.</p>
+          </footer>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
+</body>
+</html>
