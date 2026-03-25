@@ -141,6 +141,37 @@
           { decision: "Optuna vs GridSearch", reason: "TPE 알고리즘으로 탐색 효율 3-5배 향상" },
           { decision: "Airflow 조건부 재학습", reason: "drift ratio > 30%일 때만 학습하여 불필요한 컴퓨팅 비용 절감" }
         ]
+      },
+      {
+        id: "dungeonai-agents",
+        title: "DungeonAI-Agents",
+        subtitle: "Unity ML-Agents 기반 던전 적 AI 강화학습",
+        category: "Game AI / ML",
+        color: "#ef4444",
+        icon: "🧠",
+        description: "Unity ML-Agents PPO 강화학습으로 던전 적 AI를 훈련시키는 프로젝트. BSP 절차적 던전 생성, A* 길찾기, 3단계 커리큘럼 학습을 통해 점진적으로 똑똑해지는 적 AI를 구현했습니다. ONNX 모델 익스포트로 Unity 런타임 추론까지 지원합니다.",
+        techStack: ["Unity", "ML-Agents", "PPO", "C#", "Python", "ONNX", "TensorBoard", "PyTorch", "A*", "BSP"],
+        metrics: [
+          { label: "커리큘럼", value: "3단계", desc: "점진적 난이도 학습" },
+          { label: "관측 공간", value: "26차원", desc: "GridSensor + 속성" },
+          { label: "코드", value: "5,900+", desc: "LOC (C# + Python)" },
+          { label: "추론", value: "ONNX", desc: "Unity 런타임 배포" }
+        ],
+        highlights: [
+          "PPO 강화학습 에이전트 — 26차원 관측(GridSensor + 체력/위치/전투 상태) + 7개 행동(이동/회전/공격/스킬)",
+          "BSP 절차적 던전 생성 — 재귀 분할 + 복도 연결, 매 에피소드 새 맵 생성으로 일반화 향상",
+          "3단계 커리큘럼 학습 — Basic(5×5) → Intermediate(10×10, 3적) → Advanced(15×15, 5적+함정)",
+          "A* 그리드 길찾기 — Binary Heap 최적화, 대각선 이동 + 동적 장애물 지원",
+          "Potential-Based Reward Shaping — φ(s) 기반 보상으로 학습 안정성 확보",
+          "ONNX 모델 익스포트 + 유효성 검증 파이프라인 — Unity Barracuda 추론 배포",
+          "TensorBoard 실시간 학습 모니터링 + matplotlib 시각화 스크립트"
+        ],
+        github: "https://github.com/dbwjdtn10/DungeonAI-Agents",
+        decisions: [
+          { decision: "PPO vs SAC", reason: "이산 행동 공간(7종)에 PPO가 더 안정적, 게임 AI 특성에 적합" },
+          { decision: "BSP vs Wave Function Collapse", reason: "방+복도 구조가 전통적 던전 레이아웃에 자연스럽고 구현 복잡도 적절" },
+          { decision: "Curriculum Learning 3단계", reason: "처음부터 복잡한 환경 학습 시 수렴 실패 → 점진적 난이도로 안정적 학습" }
+        ]
       }
     ];
 
@@ -160,7 +191,7 @@
     const SKILLS = {
       "Game Development": ["Unity 6.3", "Godot 4", "C#", "GDScript", "Object Pooling", "ScriptableObject", "State Machine", "Editor Tooling"],
       "AI / LLM": ["LangChain", "LangGraph", "RAG (Hybrid)", "Prompt Engineering", "Structured Output", "Gemini", "Claude API", "Ollama"],
-      "ML / MLOps": ["XGBoost", "LightGBM", "Optuna", "SHAP", "MLflow", "DVC", "Airflow", "ONNX"],
+      "ML / MLOps": ["XGBoost", "LightGBM", "Optuna", "SHAP", "MLflow", "DVC", "Airflow", "ONNX", "ML-Agents", "PPO"],
       "Backend": ["FastAPI", "WebSocket", "Celery", "PostgreSQL", "Redis", "Docker", "JWT/API Key"],
       "Frontend": ["React", "TypeScript", "Tailwind CSS", "Streamlit"],
       "Infra / DevOps": ["Docker Compose", "GitHub Actions", "Prometheus", "Grafana", "AWS EC2"],
