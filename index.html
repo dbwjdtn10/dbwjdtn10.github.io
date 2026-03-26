@@ -103,7 +103,7 @@
           "스포일러 방지 힌트 엔진 (hint_level → max_stage 매핑)",
           "자가 평가 루프 (Persona Consistency + Hallucination Check)"
         ],
-        github: "https://github.com/dbwjdtn10/Npcdialogueengine",
+        github: "https://github.com/dbwjdtn10/NpcDialogueEngine",
         decisions: [
           { decision: "순차 파이프라인 vs 병렬", reason: "보안 필터가 먼저 실행되어야 비용 절감 (악의적 입력 시 LLM 미호출)" },
           { decision: "Hybrid RAG (Vector+BM25)", reason: "한국어 세계관 문서에서 키워드 정확도와 의미 검색을 모두 확보" },
@@ -177,15 +177,15 @@
 
     const OTHER_PROJECTS = [
       { title: "AbyssalDescent", desc: "AI 던전 마스터 기반 3D 로그라이크 (Godot 4 + FastAPI)", tags: ["Godot 4", "AI DM", "3D"], github: "https://github.com/dbwjdtn10/AbyssalDescent" },
-      { title: "AI Arena", desc: "자연어로 전투 전략을 입력하는 실험적 격투 게임", tags: ["Godot 4", "NLP", "실시간"], github: "https://github.com/dbwjdtn10/AI_Arena" },
+      { title: "AI Arena", desc: "자연어로 전투 전략을 입력하는 실험적 격투 게임", tags: ["Godot 4", "NLP", "실시간"], github: "https://github.com/dbwjdtn10/ai-arena" },
       { title: "Game Content Pipeline", desc: "AI 기반 게임 콘텐츠 자동 생성 + 4중 검증 파이프라인", tags: ["Celery", "Pydantic", "LLM"], github: "https://github.com/dbwjdtn10/game-content-pipeline" },
-      { title: "Procedural Quest Writer", desc: "AI 절차적 퀘스트 자동 생성 풀스택 데모", tags: ["React", "FastAPI", "Gemini"], github: "https://github.com/dbwjdtn10/Procedural-Quest-Writer" },
+      { title: "Procedural Quest Writer", desc: "AI 절차적 퀘스트 자동 생성 풀스택 데모", tags: ["React", "FastAPI", "Gemini"], github: "https://github.com/dbwjdtn10/procedural-quest-writer" },
       { title: "Smart Monitor Agent", desc: "AI 리서치/모니터링 봇 — 크롤링 + Telegram 알림", tags: ["Playwright", "Gemini", "Strategy Pattern"], github: "https://github.com/dbwjdtn10/smart-monitor-agent" },
-      { title: "AI Email Triage", desc: "LangGraph 5-에이전트 이메일 자동 처리 파이프라인", tags: ["LangGraph", "Fan-out", "HITL"], github: "https://github.com/dbwjdtn10/AI-email-triage" },
+      { title: "AI Email Triage", desc: "LangGraph 5-에이전트 이메일 자동 처리 파이프라인", tags: ["LangGraph", "Fan-out", "HITL"], github: "https://github.com/dbwjdtn10/ai-email-triage" },
       { title: "4Bro", desc: "AI 광고 어시스턴트 데스크톱 앱 (3단계 LLM 폴백)", tags: ["PyInstaller", "Gemini", "Agent"], github: "https://github.com/dbwjdtn10/4Bro" },
       { title: "FinalBite (Unity)", desc: "뱀서라이크 모바일 게임 — Google Play 출시 준비", tags: ["Unity 6.3", "Mobile", "IAP"], github: "https://github.com/dbwjdtn10/FinalBite" },
       { title: "StoryProof", desc: "AI 소설 분석/창작 플랫폼 — 4인 팀 팀장 (6주)", tags: ["RAG", "Celery", "Team Lead"], github: "https://github.com/dbwjdtn10/StoryProof" },
-      { title: "LocalDocs", desc: "Tauri 2.0 + Rust 로컬 AI 문서 어시스턴트", tags: ["Tauri", "Rust", "Ollama"], github: "https://github.com/dbwjdtn10/LocalDocs" },
+      { title: "LocalDocs", desc: "Tauri 2.0 + Rust 로컬 AI 문서 어시스턴트", tags: ["Tauri", "Rust", "Ollama"], github: "https://github.com/dbwjdtn10/localdocs" },
     ];
 
     const SKILLS = {
