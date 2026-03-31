@@ -44,7 +44,7 @@
       phone: "010-2633-8801",
       github: "https://github.com/dbwjdtn10",
       intro: "게임 개발과 AI를 결합하여, 플레이어에게 더 깊은 경험을 제공하는 시스템을 설계합니다.",
-      subIntro: "Unity/Godot 게임 개발부터 LLM 기반 NPC 대화 시스템, ML 유저 이탈 예측까지 — 게임 산업의 AI 혁신을 이끌어갈 준비가 되어있습니다."
+      subIntro: "Unity/Godot 게임 개발부터 Stable Diffusion+LoRA 이미지 생성, LLM 기반 NPC 대화 시스템, ML 유저 이탈 예측까지 — 게임 산업의 AI 혁신을 이끌어갈 준비가 되어있습니다."
     };
 
     const FEATURED_PROJECTS = [
@@ -143,6 +143,38 @@
         ]
       },
       {
+        id: "gameart-pipeline",
+        title: "GameArt-AI-Pipeline",
+        subtitle: "SD+LoRA 기반 게임 아트 에셋 자동 생성 파이프라인",
+        category: "Image Gen AI",
+        color: "#f472b6",
+        icon: "🎨",
+        description: "Stable Diffusion + LoRA 기반으로 게임 아트 에셋을 자동 생성하는 End-to-End 프로덕션 파이프라인. LoRA 파인튜닝 학습부터 API 서빙, 배치 대량 생성, 품질 평가, 실험 추적까지 이미지 생성 AI의 전체 생애주기를 단일 프로젝트로 커버합니다.",
+        techStack: ["Stable Diffusion", "LoRA", "diffusers", "peft", "FastAPI", "ControlNet", "asyncio", "clean-fid", "open_clip", "TensorBoard", "Docker", "CUDA 12.2", "pytest"],
+        metrics: [
+          { label: "생성 모드", value: "4종", desc: "txt2img/img2img/inpaint/ControlNet" },
+          { label: "모듈", value: "5개", desc: "학습/서빙/배치/평가/실험" },
+          { label: "품질 평가", value: "FID+CLIP", desc: "정량 자동 평가" },
+          { label: "배포", value: "Docker GPU", desc: "CUDA 12.2 프로덕션" }
+        ],
+        highlights: [
+          "diffusers + peft 기반 UNet LoRA 학습 — rank, alpha, target_modules 커스터마이징, YAML 설정 관리",
+          "Gradient Accumulation + Mixed Precision(fp16/bf16) + OOM 자동 감지/복구 + --dry-run 검증",
+          "FastAPI 추론 서버 — txt2img/img2img/inpaint/ControlNet 4종 + 런타임 LoRA 핫스왑 API",
+          "ControlNet(Canny/Depth) 조건부 생성 — 캐릭터 포즈, 배경 구도 제어",
+          "YAML 프롬프트 템플릿 + 변수 치환({style}, {weapon_type}) — 카테고리별 게임 에셋 양산",
+          "asyncio + aiohttp 비동기 병렬 배치 생성 — 자동 재시도 + 메타데이터 JSON 쌍 저장",
+          "clean-fid FID Score + open_clip CLIP Score 정량 품질 평가 → JSON 리포트",
+          "TensorBoard 실험 추적 + A/B 비교 HTML 리포트 — LoRA 버전 간 성능 비교"
+        ],
+        github: "https://github.com/dbwjdtn10/GameArt-AI-Pipeline",
+        decisions: [
+          { decision: "SD v1.5 + LoRA vs Full Fine-tuning", reason: "12GB VRAM에서 경량 파인튜닝 가능, 스타일별 LoRA 핫스왑으로 유연성 확보" },
+          { decision: "FID + CLIP 이중 평가", reason: "FID로 분포 품질, CLIP으로 프롬프트 정합성 — 상호 보완적 평가 체계" },
+          { decision: "프롬프트 템플릿 시스템", reason: "카테고리(캐릭터/배경/아이템)별 변수 치환으로 반복 프롬프트 작성 비용 제거" }
+        ]
+      },
+      {
         id: "dungeonai-agents",
         title: "DungeonAI-Agents",
         subtitle: "Unity ML-Agents 기반 던전 적 AI 강화학습",
@@ -191,12 +223,13 @@
     { title: "CliChat", desc: "Rust + ratatui TUI 터미널 Ollama 채팅 클라이언트", tags: ["Rust", "ratatui", "Tokio"], github: "https://github.com/dbwjdtn10/clichat" },
     { title: "OllaBot", desc: "discord.py + Ollama 로컬 LLM Discord AI 챗봇", tags: ["discord.py", "Ollama"], github: "https://github.com/dbwjdtn10/ollabot" },
     { title: "Ocean Survivor", desc: "2D 벽돌깨기 어드벤처 게임 — Unity 팀프로젝트", tags: ["Unity", "C#", "WebGL"], github: "https://github.com/bupomya/OceanSurvivor" },
+      { title: "Multi-Agent Dev System", desc: "Claude CLI 기반 4에이전트(PM/기획자/개발자/리뷰어) 소프트웨어 자동 개발 시스템", tags: ["Claude CLI", "멀티에이전트", "자가개선 루프"], github: "https://github.com/dbwjdtn10/GameArt-AI-Pipeline" },
     ];
 
     const SKILLS = {
       "Game Development": ["Unity 6.3", "Godot 4", "C#", "GDScript", "Object Pooling", "ScriptableObject", "State Machine", "Editor Tooling"],
-      "AI / LLM": ["LangChain", "LangGraph", "RAG (Hybrid)", "Prompt Engineering", "Structured Output", "Gemini", "Claude API", "Ollama"],
-      "ML / MLOps": ["XGBoost", "LightGBM", "Optuna", "SHAP", "MLflow", "DVC", "Airflow", "ONNX", "ML-Agents", "PPO"],
+      "AI / LLM": ["Stable Diffusion", "LoRA (diffusers+peft)", "ControlNet", "LangChain", "LangGraph", "RAG (Hybrid)", "Prompt Engineering", "Structured Output", "Gemini", "Claude API", "Ollama"],
+      "ML / MLOps": ["XGBoost", "LightGBM", "Optuna", "SHAP", "MLflow", "DVC", "Airflow", "ONNX", "ML-Agents", "PPO", "clean-fid", "open_clip", "TensorBoard"],
       "Backend": ["FastAPI", "WebSocket", "Celery", "PostgreSQL", "Redis", "Docker", "JWT/API Key"],
       "Frontend": ["React", "TypeScript", "Tailwind CSS", "Streamlit"],
       "Infra / DevOps": ["Docker Compose", "GitHub Actions", "Prometheus", "Grafana", "AWS EC2"],
